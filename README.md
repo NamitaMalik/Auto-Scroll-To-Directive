@@ -6,121 +6,121 @@ You must be thinking what exactly is **$anchorScroll**? What is **$location.hash
 
 Let's go ahead:
 
- **$location** is a **service** in **angularJS** which exposes the current URL in the address bar so that it can be observed or manipulated. It represents the **URL** object as set of methods protocol, host, port, path, search, hash.
+**$location** is a **service** in **angularJS** which exposes the current URL in the address bar so that it can be observed or manipulated. It represents the **URL** object as set of methods protocol, host, port, path, search, hash.
 
- **hash()** method sets/returns the anchor part of the **URL**. Anchor basically refers to internal section of the web document.
+**hash()** method sets/returns the anchor part of the **URL**. Anchor basically refers to internal section of the web document.
 
- **$anchorScroll** watches **$location.hash()** and automatically **scroll**s to match any anchor whenever it changes.
+**$anchorScroll** watches **$location.hash()** and automatically **scroll**s to match any anchor whenever it changes.
 
- It's time for some action now. Have a look at the piece of HTML given below:
+It's time for some action now. Have a look at the piece of HTML given below:
 
  ```HTML
- <!DOCTYPE html>
- <html ng-app="myApp">
- <head lang="en">
-     <meta charset="UTF-8">
-     <title>My Page</title>
- </head>
- <body>
- <div id="FirstDiv">
-     <h1>Section 1</h1>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
- </div>
- <div id="SecondDiv">
-     <h1>Section 2</h1>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
- </div>
- <div id="ThirdDiv">
-     <h1>Section 3</h1>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
- </div>
- <div id="FourthDiv">
-     <h1>Section 4</h1>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
- </div>
- <div id="FifthDiv" auto-scroll-to="FifthDiv">
-     <h1>Section 5</h1>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
- </div>
- <div id="SixthDiv">
-     <h1>Section 6</h1>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
- </div>
- <div id="SeventhDiv">
-     <h1>Section 7</h1>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
- </div>
- <div id="EighthDiv">
-     <h1>Section 8</h1>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
- </div>
- <script src="angular.min.js"></script>
- <script src="autoScrollTo.js"></script>
- </body>
- </html>
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>My Page</title>
+</head>
+<body>
+<div id="FirstDiv">
+    <h1>Section 1</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+<div id="SecondDiv">
+    <h1>Section 2</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+<div id="ThirdDiv">
+    <h1>Section 3</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+<div id="FourthDiv">
+    <h1>Section 4</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+<div id="FifthDiv" auto-scroll-to="FifthDiv">
+    <h1>Section 5</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+<div id="SixthDiv">
+    <h1>Section 6</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+<div id="SeventhDiv">
+    <h1>Section 7</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+<div id="EighthDiv">
+    <h1>Section 8</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+<script src="angular.min.js"></script>
+<script src="autoScrollTo.js"></script>
+</body>
+</html>
  ```
- Now, suppose we want that every time we land to the 'myPage.html', it should automatically **scroll** to section 5 of the page. As explained above, this can be easily achieved using the **anchorScroll()** **service** of **Angular**. But what if tomorrow same requirement comes up for some other web page. Since **scrolling** to a particular section on a page is a very common use case, therefore I thought of making a **directive** so that it can be used wherever and whenever required.
+Now, suppose we want that every time we land to the 'myPage.html', it should automatically **scroll** to section 5 of the page. As explained above, this can be easily achieved using the **anchorScroll()** **service** of **Angular**. But what if tomorrow same requirement comes up for some other web page. Since **scrolling** to a particular section on a page is a very common use case, therefore I thought of making a **directive** so that it can be used wherever and whenever required.
 
- Here we go:
+Here we go:
 
  ```JavaScript
- (function (ng) {
-     'use strict';
-     var app = ng.module('myApp',[]);
-     app.directive('autoScrollTo', ['$location', '$anchorScroll', '$timeout', function ($location, $anchorScroll, $timeout) {
-         return {
-             restrict: 'A',
-             scope: false,
-             link: function (scope, elem, attr) {
-                 //code to scroll on the basis of provided id
-                 $timeout(function () {
-                         $location.hash(attr.autoScrollTo);
-                         $anchorScroll();
-                 });
-             }
-         }
-     }]);
- }(angular));
+(function (ng) {
+    'use strict';
+    var app = ng.module('myApp', []);
+    app.directive('autoScrollTo', ['$location', '$anchorScroll', '$timeout', function ($location, $anchorScroll, $timeout) {
+        return {
+            restrict: 'A',
+            scope: false,
+            link: function (scope, elem, attr) {
+                //code to scroll on the basis of provided id
+                $timeout(function () {
+                    $location.hash(attr.autoScrollTo);
+                    $anchorScroll();
+                });
+            }
+        }
+    }]);
+}(angular));
 ```
 
 In the above **JavaScript** snippet we have basically done the following:
