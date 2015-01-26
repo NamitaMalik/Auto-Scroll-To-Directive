@@ -133,6 +133,7 @@ In the above **JavaScript** snippet we have basically done the following:
     2. **element** - jqLite-wrapped element that this **directive** matches
     3. **attribute** - hash object with key-value pairs of normalized **attribute** names and their corresponding **attribute** values
 5. We have placed our code for **scrolling** into a self executing function and we have applied a delay using **$timeout**.
+
     > You must be thinking that we have forgotten to specify the time of delay. Well, we have deliberately not mentioned the delay time as omitting the delay time defaults it to ```0```. But the code block contained in it is executed only after ```DOM``` has been manipulated by Angular and after the browser renders.
 6. Then we have used **$location.hash()** to specify the element to which we need to automatically **scroll**. We know that attribute would give us the value of the corresponding **attribute**, so we are finding here the value of the **autoScrollTo** **attribute** which was placed in the ```div``` with id ```FifthDiv```.
 7. And then, off course in the end we have used our **$anchorScroll()** **service** to **scroll** to the part of the page, defined through **$location.hash()** method.
