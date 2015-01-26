@@ -2,7 +2,7 @@
 
 While working on one of my recent projects I encountered a situation where I had to scroll to a particular element on a page. This was easily achieved using the **$anchorScroll** service in **angularJS**. It simply checks the current value of $location.hash() and scrolls to the related element.
 
-You must be thinking what exactly is $anchorScroll? What is $location.hash()? How does $anchorScroll works?
+You must be thinking what exactly is **$anchorScroll**? What is **$location.hash()**? How does **$anchorScroll** works?
 
 Let's go ahead:
 
@@ -10,7 +10,7 @@ Let's go ahead:
 
  **hash()** method sets/returns the anchor part of the **URL**. Anchor basically refers to internal section of the web document.
 
- $anchorScroll watches $location.hash() and automatically scrolls to match any anchor whenever it changes.
+ **$anchorScroll** watches $location.hash() and automatically scrolls to match any anchor whenever it changes.
 
  It's time for some action now. Have a look at the piece of HTML given below:
 
@@ -20,10 +20,9 @@ Let's go ahead:
  <head lang="en">
      <meta charset="UTF-8">
      <title>My Page</title>
-     <script src="angular.min.js"></script>
  </head>
  <body>
- <div id ="FirstDiv">
+ <div id="FirstDiv">
      <h1>Section 1</h1>
      <br>
      <br>
@@ -32,7 +31,7 @@ Let's go ahead:
      <br>
      <br>
  </div>
- <div id ="SecondDiv">
+ <div id="SecondDiv">
      <h1>Section 2</h1>
      <br>
      <br>
@@ -41,7 +40,7 @@ Let's go ahead:
      <br>
      <br>
  </div>
- <div id ="ThirdDiv">
+ <div id="ThirdDiv">
      <h1>Section 3</h1>
      <br>
      <br>
@@ -50,7 +49,7 @@ Let's go ahead:
      <br>
      <br>
  </div>
- <div id ="FourthDiv">
+ <div id="FourthDiv">
      <h1>Section 4</h1>
      <br>
      <br>
@@ -59,7 +58,7 @@ Let's go ahead:
      <br>
      <br>
  </div>
- <div id ="FifthDiv" auto-scroll-to="FifthDiv">
+ <div id="FifthDiv" auto-scroll-to="FifthDiv">
      <h1>Section 5</h1>
      <br>
      <br>
@@ -68,7 +67,7 @@ Let's go ahead:
      <br>
      <br>
  </div>
- <div id ="SixthDiv">
+ <div id="SixthDiv">
      <h1>Section 6</h1>
      <br>
      <br>
@@ -77,7 +76,7 @@ Let's go ahead:
      <br>
      <br>
  </div>
- <div id ="SeventhDiv">
+ <div id="SeventhDiv">
      <h1>Section 7</h1>
      <br>
      <br>
@@ -86,7 +85,7 @@ Let's go ahead:
      <br>
      <br>
  </div>
- <div id ="EighthDiv">
+ <div id="EighthDiv">
      <h1>Section 8</h1>
      <br>
      <br>
@@ -95,6 +94,7 @@ Let's go ahead:
      <br>
      <br>
  </div>
+ <script src="angular.min.js"></script>
  <script src="autoScrollTo.js"></script>
  </body>
  </html>
@@ -125,20 +125,18 @@ Let's go ahead:
 
 In the above **JavaScript** snippet we have basically done the following:
 
-1. Defined a directive named as ```autoScrollTo```.
-2. While declaring the directive, we have also declared the dependencies : ```$location``` , ```$timeout``` and ```$anchorScroll```.
-3. We would be using this directive as an attribute of the element, hence we have given **restrict** property as ```A```. In case you want to have deeper understanding on how to make custom directives, please have a look at this very informative blog by Amit Thakkar.
+1. Defined a **directive** named as ```autoScrollTo```.
+2. While declaring the **directive**, we have also declared the dependencies : **$location** , **$timeout** and **$anchorScroll**.
+3. We would be using this **directive** as an attribute of the element, hence we have given **restrict** property as ```A```. In case you want to have deeper understanding on how to make custom **directive**s, please have a look at this very informative blog by Amit Thakkar.
 4. Then, there is a link function which is executed while attaching the template to the DOM. Link function basically has  parameters:
-    A. scope - angular scope object
-    B. element - jqLite-wrapped element that this directive matches
-    C. attribute - hash object with key-value pairs of normalized attribute names and their corresponding attribute values
+    1. scope - angular scope object
+    2. element - jqLite-wrapped element that this **directive** matches
+    3. attribute - hash object with key-value pairs of normalized attribute names and their corresponding attribute values
 5. We have placed our code for scrolling into a self executing function and we have applied a delay using $timeout.
-
-> You must be thinking that we have forgotten to specify the time of delay. Well, we have deliberately not mentioned the delay time as omitting the delay time defaults it to ```0```. But the code block contained in it is executed only after ```DOM``` has been manipulated by Angular and after the browser renders.
-
+    > You must be thinking that we have forgotten to specify the time of delay. Well, we have deliberately not mentioned the delay time as omitting the delay time defaults it to ```0```. But the code block contained in it is executed only after ```DOM``` has been manipulated by Angular and after the browser renders.
 6. Then we have used ```$location.hash()``` to specify the element to which we need to automatically scroll. We know that attribute would give us the value of the corresponding attribute, so we are finding here the value of the ```autoScrollTo``` attribute which was placed in the ```div``` with id ```FifthDiv```.
 7. And then, off course in the end we have used our ```$anchorScroll()``` service to scroll to the part of the page, defined through ```$location.hash()``` method.
 
-Your autoScrollTo directive is now ready to use anywhere!
+Your autoScrollTo **directive** is now ready to use anywhere!
 
-You can checkout the full working source code from here.
+You can checkout the full working source code from [here](https://github.com/NamitaMalik/Auto-Scroll-To-Directive).
