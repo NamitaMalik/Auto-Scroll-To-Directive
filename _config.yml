@@ -1,0 +1,8 @@
+title: Auto-Scroll-To Directive
+description: This repository discusses about a sample directive for automatically scrolling to a particular element.
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-hacker
+
+gems:
+  - jekyll-mentions
